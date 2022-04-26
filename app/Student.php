@@ -9,6 +9,12 @@ class Student extends Model
     // use HasFactory;
     protected $table="student";
     protected $primaryKey="s_id";
+    protected $filllable=['name',
+                          'Rollnumber',
+                          'gender',
+                          'phonenumber',
+                          'email'];
+
     public static function val($name,$Rollnumber,$gender,$phonenumber,$email,$password)
     {
     $student= new Student;
@@ -20,7 +26,6 @@ class Student extends Model
     $student->password=$password;
     $student->save();
 }
-
     public static function Del($s_id){
     DB::delete('delete from student where s_id = ?',[$s_id]);
     }

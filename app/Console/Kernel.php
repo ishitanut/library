@@ -4,7 +4,6 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
 class Kernel extends ConsoleKernel
 {
     /**
@@ -12,10 +11,6 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
-    ];
-
     /**
      * Define the application's command schedule.
      *
@@ -26,8 +21,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+       $schedule->call(function (){
+           info("run it every minute");
+       })->everyMinute();;
     }
-
     /**
      * Register the Closure based commands for the application.
      *

@@ -14,9 +14,9 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
       <a class="nav-link active" aria-current="page" href="#">Student</a>
-      <a class="nav-link" href="{{url('/issue-view')}}">Return/Reissue</a>
+      <a class="nav-link" href="{{url('/issue_view')}}">Return/Reissue</a>
 <a class="nav-link" href="{{url('/issue')}}">Issue Books</a>
-<a class="nav-link active" aria-current="page" href="{{url('/book-student')}}">Book</a>
+<a class="nav-link active" aria-current="page" href="{{url('/book_student')}}">Book</a>
 <a class="nav-link active" aria-current="page" href="{{url('/slogout')}}">Logout</a>
 </div>
 </div>

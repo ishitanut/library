@@ -28,6 +28,7 @@
                   @endforeach
               </tbody>
           </table>
+          {{ $data->appends($_GET)->links()}}
       </div>
       <script>
   $(document).ready(function(){
@@ -38,5 +39,6 @@
       });
     });
   });
+
   </script>            
  

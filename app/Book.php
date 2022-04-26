@@ -9,6 +9,10 @@ class Book extends Model
 {
     protected $table="book";
     protected $primaryKey="b_id";
+    protected $filllable=['name',
+                         'author',
+                         'category',
+                         'publisher'];
 
     public static function delBook($b_id)
     {
@@ -23,7 +27,6 @@ class Book extends Model
         $book->publisher=$publisher;
         $book->save();
     }
-    
     public static function updateBook($b_id,$name,$author,$category,$publisher)
     {
       $book=Book::find($b_id);

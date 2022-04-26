@@ -19,42 +19,55 @@ class bookcontroller extends Controller
       if(session()->has('name'))
       {
         $request->validate();
-            $name=$request->input('name');
-            $author=$request->input('author');
-            $category=$request->input('category');
-            $publisher=$request->input('publisher');
-            Book::storeBook($name,$author,$category,$publisher);
-            return redirect ('/book/view');
-              }
-              else return redirect('/admin');
+        $name=$request->input('name');
+        $author=$request->input('author');
+        $category=$request->input('category');
+        $publisher=$request->input('publisher');
+        try{
+        Book::storeBook($name,$author,$category,$publisher);
+        }
+        catch(\Exception $e)
+        {
+          return view('error');
+        }
+        return redirect ('/book/view');
+      }
+      else return redirect('/admin');
     }
     public function view()
     {
       if(session()->has('name'))
       {
-         $books=Book::paginate(5);
-           $data=compact('books');
-         return view('book.book-view',compact('books'))->with($data);
+        $books=Book::paginate(5);
+        $data=compact('books');
+        return view('book.book-view',compact('books'))->with($data);
       }
-         else return redirect('/admin');
-      }
-      public function studentView()
+      else return redirect('/admin');
+    }
+    public function studentView()
     {
       if(session()->has('email'))
       {
+        try
+        {
          $books=Book::paginate(1);
-           $data=compact('books');
-         return view('book.book-student',compact('books'))->with($data);
+        }
+        catch(\Exception $e)
+        {
+          return view('error');
+        }
+        $data=compact('books');
+        return view('book.book-student',compact('books'))->with($data);
       }
          else return redirect('/register');
-      }
+    }
 
     public function delete(Book $book,$b_id)
     {
       if(session()->has('name'))
       {
-               Book:: delBook($b_id);
-              return redirect ('/book/view');
+        Book:: delBook($b_id);
+        return redirect ('/book/view');
       }
       else return redirect('/admin');
     }
@@ -67,12 +80,12 @@ class bookcontroller extends Controller
     {
       if(session()->has('name'))
       {
-      $name=$request->get('name');
-      $author=$request->get('author');
-      $category=$request->get('category');
-      $publisher=$request->get('publisher');
-      Book::updateBook($b_id,$name,$author,$category,$publisher);
-      return redirect('/book/view');
+        $name=$request->get('name');
+        $author=$request->get('author');
+        $category=$request->get('category');
+        $publisher=$request->get('publisher');
+        Book::updateBook($b_id,$name,$author,$category,$publisher);
+        return redirect('/book/view');
       }
       else return redirect('/admin');
     }

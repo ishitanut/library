@@ -15,7 +15,7 @@
       <div class="navbar-nav">
       <a class="nav-link active" aria-current="page" href="/helloadmin">Admin</a>
       <a class="nav-link" href="{{url('/student/view')}}">Student Info</a>
-<a class="nav-link" href="{{url('/issue-teacher')}}">Issue Details</a>
+<a class="nav-link" href="{{url('/api/issue_teacher')}}">Issue Details</a>
 <a class="nav-link active" aria-current="page" href="{{url('/book/view')}}">Books</a>
 <a class="nav-link active" aria-current="page" href="{{url('/bookentry')}}">Add Books</a>
 <a class="nav-link active" aria-current="page" href="{{url('/logout')}}">Logout</a>

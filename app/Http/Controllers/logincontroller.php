@@ -7,25 +7,39 @@ use Illuminate\Support\Facades\DB;
 
 class logincontroller extends Controller
 {
-    public function loginindex()
+ public function loginindex()
+ {
+   return view('login');
+ }
+ public function login(Request $request)
+ {
+  $email=$request->input('email');
+  $password=$request->input('password');
+  try
+  {
+  $data=Student::studentLogin($email,$password,$request);
+  }
+  catch(\Exception $e)
+  {
+    return view('error');
+  }
+  if(isset($data))
+  {
+    return view('student-personal')->with($data);
+  }
+  else
+  {
+    return redirect('/register');
+  }
+ }
+ public function studentLogout()
+ {
+   if(session()->has('email'))
     {
-        return view('login');
+     session()->forget('email',null);
     }
-    public function login(Request $request)
-    {
-     $email=$request->input('email');
-     $password=$request->input('password');
-     $data=Student::studentLogin($email,$password,$request);
-     if(isset($data))
-     {
-         
-         return view('student-personal')->with($data);
-     }
-     else{
-         return redirect('/register');
-         echo "";
-     }
-}
+    return redirect('/register')   ;
+ }
 
 }
         // $user= Student::where('name',$request->input('name'))->get();
