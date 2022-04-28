@@ -18,4 +18,4 @@ use App\Http\Controllers\issuecontroller;
 //     return $request->user();
 // });
  Route::get('/list','registerationcontroller@list');
-Route::get('/issue-teacher','issuecontroller@teacherView');
+Route::get('/issue_teacher','issuecontroller@teacherView');

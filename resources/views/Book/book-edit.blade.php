@@ -6,6 +6,7 @@
       <a href="/book/view">Back</a>
   <form action="/book/update/{{$book->b_id}}" method ="post">
   {!! csrf_field() !!}
+  {{method_field('PUT')}}
         <div class="center">
         <h1 class="text-center">Edit Book</h1>
         <div class="form-group">

@@ -2,7 +2,6 @@
 @extends('layouts.studentviewlayout')
         {{ csrf_field() }}
       <div class="container">
-          <a href="/return-book">Return</a>
               <input  style="background-color:light-green;" class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
     <table class="styled-table">
@@ -31,10 +30,15 @@
                                         @else
                                             <span class='badge badge-danger'>Issued</span>
                                         @endif</td>
-</td>
-                         
-                      
-                      <td><a href="/book/delete/{{$book->b_id}}"><button>Delete</button></td></a>
+                     </td>
+                      <td>
+                           <form action="/book/delete/{{$book->b_id}}" method="POST">
+                             {{csrf_field()}}
+                             {{method_field('DELETE')}}
+                             <input type="hidden" name="b_id">
+                             <button type="submit">Delete</button>
+                           </form>
+                      </td>
                   <td><a href="/book/edit/{{$book->b_id}}"><button >Edit</button></td></a>
                     
                   </tr>

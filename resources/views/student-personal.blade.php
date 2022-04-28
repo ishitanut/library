@@ -1,5 +1,6 @@
 @include('Student')
 @extends('layouts.studentviewlayout')
+  <div class="container">
   <table class="styled-table">
               <thead>
                   <tr>
@@ -13,11 +14,11 @@
               <tbody id="myTable">
                   @foreach($student as $data)
                   <tr>
-                      <td>{{$data->s_id}}
-                      <td>{{$data->name}}</td>
-                      <td>{{$data->email}}</td>
-                      <td>{{$data->phonenumber}}</td>
-                      <td>{{$data->Rollnumber}}</td>     
+                      <th>{{$data->s_id}}</th>
+                      <th>{{$data->name}}</th>
+                      <th>{{$data->email}}</th>
+                      <th>{{$data->phonenumber}}</th>
+                      <th>{{$data->Rollnumber}}</th>     
                   </tr>
                   @endforeach
               </tbody>

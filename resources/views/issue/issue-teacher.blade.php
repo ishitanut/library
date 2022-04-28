@@ -11,7 +11,7 @@
                       <th>Book Name</th>
                       <th>Phone Number</th>
                       <th>Email</th>
-                      <th>Issue_date</th> 
+                      <th>Issue date</th> 
                       <th>Return Date</th>
                   </tr>
               </thead>

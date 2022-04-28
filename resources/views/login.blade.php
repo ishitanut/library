@@ -50,7 +50,6 @@ foreach ($errors->get('password_confirmation') as $message) {
             <!-- <small id="helpId" class="text-muted">Help text</small> -->
             
         </div>
-        <div class="pass"> <a href ="#">Frogot Password?</a></div>
         <button >
             Submit
         </button>

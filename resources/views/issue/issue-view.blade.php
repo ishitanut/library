@@ -1,7 +1,6 @@
 @include('Student')
 @extends('layouts.studentviewlayout') 
       <div class="container">
-          <a href="/return">Return</a>
               <input  style="background-color:light-green;" class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
     <table class="styled-table">
@@ -11,7 +10,7 @@
                       <th>Book Name</th>
                       <th>Phone Number</th>
                       <th>Email</th>
-                      <th>Issue_date</th> 
+                      <th>Issue date</th> 
                       <th>Return Date</th>
                       <th>Status</th>
                       <th>Reissue</th>

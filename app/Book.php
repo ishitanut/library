@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Book extends Model
 {
@@ -14,9 +13,10 @@ class Book extends Model
                          'category',
                          'publisher'];
 
-    public static function delBook($b_id)
+    public static function deleteBook($b_id)
     {
-        DB::delete('delete from book where b_id = ?',[$b_id]);
+        $data=Book::find($b_id);
+        $data->delete();
     }
     public static function storeBook($name,$author,$category,$publisher)
     {

@@ -1,21 +1,14 @@
 <?php
 use Illuminate\support\Facades\Route;
 // use App\Http\Controllers\DemoController;
-use App\Http\Controllers\registerationcontroller;
-use App\Http\Controllers\logincontroller;
-use App\Http\Controllers\bookcontroller;
-use App\Http\Controllers\authorcontroller;
-use App\Http\Controllers\categorycontroller;
-use App\Http\Controllers\publishercontroller;
-use App\Http\Controllers\issuecontroller;
+use App\Http\Controllers\registerationController;
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\bookController;
+use App\Http\Controllers\issueController;
 use App\Student;
 use App\Book;
-use App\Authors;
-use App\Publisher;
-use App\Categories;
 use App\Admin;
 use App\Issue;
-use App\Setting;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,81 +19,52 @@ use App\Setting;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', DemoController::class, 'index');
-// Route::get('/auth/delete/{id}','authorcontroller@delete');
-// Route::get('/author','authorcontroller@index');
-// Route::post('/author','authorcontroller@author');
-// Route::get('/category','categorycontroller@index');
-// Route::post('/category','categorycontroller@category');
-// Route::get('/publisher','publishercontroller@index');
-// Route::post('/publisher','publishercontroller@');
-// Route::get('/','DemoController@index');
-// Route::get('/auth/view','authorcontroller@view');
-// Route::get('/auth',function(){
-//   $author=Authors::all();
-// });
-// Route::get('/publish',function(){
-//   $publisher=Publisher::all();
-//   echo"<pre>";
-//   print_r($publisher->toArray());
-// });
-// Route::get('/publish/view','publishercontroller@view');
-// Route::get('/publish/delete/{id}','publishercontroller@delete');
+Route::get('/','registerationController@dashboardView');
 
-// Route::get('/cat',function(){
-//   $category=Categories::all();
-//   echo"<pre>";
-//   print_r($category->toArray());
-// });
-// Route::get('/cat/view','categorycontroller@view');
-// Route::get('/cat/delete/{id}','categorycontroller@delete');
-Route::get('/','registerationcontroller@dashboardView');
+Route::get('/admin','adminController@loginindex');
+Route::post('/admin','adminController@loginadmin');
 
-Route::get('/admin','admincontroller@loginindex');
-Route::post('/admin','admincontroller@loginadmin');
+Route::group(['middleware' => ['web']], function () {
 
-Route::group(['middleware' => ['web']], function (){
+  Route::group(['prefix' => '/student'], function () {
+    Route::get('/view', 'registerationController@view');
+    Route::get('/create', 'registerationController@create');
+    Route::get('/edit/{s_id}', 'registerationController@edit');
+    Route::put('/update/{s_id}', 'registerationController@update');
+    Route::delete('/delete/{s_id}', 'registerationController@delete');
+  });
 
-Route::group(['prefix'=>'/student'],function(){
-Route::get('/view','registerationcontroller@view');
-Route::get('/create','registerationcontroller@create');
-Route::get('/edit/{s_id}','registerationcontroller@edit');
-Route::post('/update/{s_id}','registerationcontroller@update');
-Route::get('/delete/{s_id}','registerationcontroller@delete');
+  Route::get('/issue-teacher', 'issueController@teacherView');
+
+  Route::group(['prefix' => '/book'], function () {
+    Route::get('/view', 'bookController@view');
+    Route::delete('/delete/{b_id}', 'bookController@delete');
+    Route::get('/edit/{b_id}', 'bookController@edit');
+    Route::put('/update/{b_id}', 'bookController@update');
+  });
+  Route::get('/bookentry', 'bookController@index');
+  Route::post('/bookentry', 'bookController@addnew');
 });
-Route::get('/issue-teacher','issuecontroller@teacherView');
 
-Route::group(['prefix'=>'/book'],function(){
-Route::get('/view','bookcontroller@view');
-Route::get('/delete/{b_id}','bookcontroller@delete');
-Route::get('/edit/{b_id}','bookcontroller@edit');
-Route::post('/update/{b_id}','bookcontroller@update');
+Route::get('/logout','adminController@adminLogout');
+
+
+Route::get('/register','registerationController@index');
+Route::post('/register','registerationController@store');
+
+Route::get('/login','loginController@loginindex');
+Route::post('/student-personal','loginController@login');
+
+Route::group(['middleware' => ['guard']], function () {
+  Route::get('/issue_view', 'issueController@view');
+  Route::get('/reissue/{id}', 'issueController@edit');
+  Route::post('/reissue/{id}', 'issueController@update');
+  Route::get('/return/{id}', 'issueController@returnView');
+  Route::post('/return/{id}', 'issueController@return');
+  Route::get('/fine/{id}', 'issueController@fine');
+  Route::get('/issue', 'issueController@index');
+  Route::post('/issue', 'issueController@store');
+  Route::get('/book_student', 'bookController@studentView');
 });
-Route::get('/bookentry','bookcontroller@index');
-Route::post('/bookentry','bookcontroller@addnew');
-});
-Route::get('/logout','admincontroller@adminLogout');
-
-
-Route::get('/register','registerationcontroller@index');
-Route::post('/register','registerationcontroller@store');
-
-
-Route::get('/login','logincontroller@loginindex');
-Route::post('/student-personal','logincontroller@login');
-
-Route::group(['middleware' => ['guard']], function (){
-Route::get('/issue_view','issuecontroller@view');
-Route::get('/reissue/{id}','issuecontroller@edit');
-Route::post('/reissue/{id}','issuecontroller@update');
-Route::get('/return/{id}','issuecontroller@returnView');
-Route::post('/return/{id}','issuecontroller@return2');
-Route::get('/fine/{id}','issuecontroller@fine');
-Route::get('/issue','issuecontroller@index');
-Route::post('/issue','issuecontroller@store');
-Route::get('/book_student','bookcontroller@studentView');
-Route::get('/student_edit/{s_id}','registerationcontroller@editStudent');
-Route::post('/student_update/{s_id}','registerationcontroller@updateStudent');
-});
-Route::get('/slogout','registerationcontroller@studentLogout');
+Route::get('/slogout','loginController@studentLogout');
 

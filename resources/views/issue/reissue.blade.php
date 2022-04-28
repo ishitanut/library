@@ -2,7 +2,6 @@
 @extends('layouts.studentlayout')
   <div class="center">
         <h1>Reissue</h1>
-      <a href="/issue-view">Back</a>
   <form action="/reissue/{{$issue->id}}" method ="post">
   {!! csrf_field() !!}
        

@@ -15,10 +15,13 @@
       <div class="navbar-nav">
       <a class="nav-link active" aria-current="page" href="#">Student</a>
       <a class="nav-link" href="{{url('/issue_view')}}">Return/Reissue</a>
-<a class="nav-link" href="{{url('/issue')}}">Issue Books</a>
+<a class="nav-link" href="{{url('/issue')}}">Issue</a>
 <a class="nav-link active" aria-current="page" href="{{url('/book_student')}}">Book</a>
-<a class="nav-link active" aria-current="page" href="{{url('/slogout')}}">Logout</a>
 </div>
+</div>
+<form class="form-inline my-2 my-lg-0">
+<a class="nav-link active" aria-current="page" href="{{url('/slogout')}}">Logout</a>
+</form>
 </div>
 </div>
 </nav>

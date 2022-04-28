@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
        $schedule->call(function (){
            info("run it every minute");
-       })->everyMinute();;
+       })->everyMinute();
     }
     /**
      * Register the Closure based commands for the application.

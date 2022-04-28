@@ -3,7 +3,7 @@
   
         {{ csrf_field() }}
       <div class="container">
-          <a href="/student/create">Add</a>
+          <!-- <a href="/student/create">Add</a> -->
               <input  style="background-color:light-green;" class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
     <table class="styled-table">
@@ -22,7 +22,7 @@
               <tbody id="myTable">
                   @foreach($students as $student)
                   <tr>
-                      <td>{{$student->s_id}}
+                      <td>{{$student->s_id}}</td>
                       <td>{{$student->name}}</td>
                       <td>{{$student->Rollnumber}}</td>
                       <td>
@@ -37,7 +37,15 @@
                       </td>
                       <td>{{$student->phonenumber}}</td>
                       <td>{{$student->email}}</td>
-                      <td><a href="/student/delete/{{$student->s_id}}"><button>Delete</button></td></a>
+                      <!-- <td><a href="/student/delete/{{$student->s_id}}"><button>Delete</button></td></a> -->
+                      <td>
+                           <form action="/student/delete/{{$student->s_id}}" method="POST">
+                             {{csrf_field()}}
+                             {{method_field('DELETE')}}
+                             <input type="hidden" name="s_id">
+                             <button type="submit">Delete</button>
+                           </form>
+                      </td>
                   <td><a href="/student/edit/{{$student->s_id}}"><button >Edit</button></td></a>
                     
                   </tr>

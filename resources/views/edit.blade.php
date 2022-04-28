@@ -5,6 +5,7 @@
         <h1 class="text-center">Edit Student</h1>
   <form action="/student/update/{{$student->s_id}}" method ="post">
   {!! csrf_field() !!}
+  {{method_field('PUT')}}
          <div class="form-group">
             <input type="text" name="name" id ="name" aria-describedby="helpId" required value="{{$student->name}}">
             <span></span>
